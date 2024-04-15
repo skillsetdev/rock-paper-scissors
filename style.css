@@ -1,3 +1,18 @@
+body {
+  background-color: black;
+}
+
+button {
+  display: flex;
+  flex-direction: column;
+}
+
+#users-selection {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+}
+
 #row {
   display: flex;
   flex-direction: row;
@@ -5,7 +20,17 @@
 }
 
 #column {
+  height: 80vh;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
+}
+
+#score {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  color: white;
 }
