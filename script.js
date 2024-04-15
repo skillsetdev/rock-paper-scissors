@@ -1,4 +1,4 @@
-alert("GAME BEGAN!");
+//////////////Functions////////////////////
 function getComputerChoice() {
   const randomNum = Math.floor(Math.random() * 3); //returns a random integer from 0 to 2
   switch (randomNum) {
@@ -10,29 +10,6 @@ function getComputerChoice() {
       return "scissors";
   }
 }
-
-function getUserInput() {
-  let userInput = prompt("Rock, Paper or Scissors?");
-  if (
-    userInput.trim().toLowerCase() == "rock" ||
-    userInput.trim().toLowerCase() == "paper" ||
-    userInput.trim().toLowerCase() == "scissors"
-  ) {
-    return userInput.toLowerCase();
-  } else {
-    return userInput;
-  }
-}
-
-const computerChoice = getComputerChoice();
-const userInput = getUserInput();
-const result = getResult(computerChoice, userInput);
-//const result = getResult();
-
-console.log(
-  `${result} (Your choice: ${userInput}, Computers choice: ${computerChoice})`
-);
-
 function getResult(computer, user) {
   if (computer === user) {
     return "draw";
@@ -48,3 +25,59 @@ function getResult(computer, user) {
     return "you lost :(";
   }
 }
+//////////////Gameplay///////////
+
+let selectedOption = "";
+const column = document.querySelector("#column");
+const buttons = document.querySelector("#users-selection");
+
+const alert = document.createElement("div");
+alert.textContent = "we started";
+column.appendChild(alert);
+
+buttons.addEventListener("click", (event) => {
+  let target = event.target;
+  if (selectedOption === "") {
+    switch (target.id) {
+      case "rock":
+      case "paper":
+      case "scissors":
+        selectedOption = target.id;
+        runScript();
+        break;
+    }
+  }
+});
+function runScript() {
+  const computerChoice = getComputerChoice();
+  const result = getResult(computerChoice, selectedOption);
+  const resultText = document.createElement("p");
+  resultText.textContent = result;
+  column.appendChild(resultText);
+}
+/*alert("GAME BEGAN!");
+
+
+function getUserInput() {
+  let userInput = prompt("Rock, Paper or Scissors?");
+  if (
+    userInput.trim().toLowerCase() == "rock" ||
+    userInput.trim().toLowerCase() == "paper" ||
+    userInput.trim().toLowerCase() == "scissors"
+  ) {
+    return userInput.toLowerCase();
+  } else {
+    return userInput;
+  }
+}
+
+
+const userInput = getUserInput();
+
+//
+
+console.log(
+  `${result} (Your choice: ${userInput}, Computers choice: ${computerChoice})`
+);
+
+*/
