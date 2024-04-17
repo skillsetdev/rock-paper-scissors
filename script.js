@@ -1,16 +1,16 @@
 //////////////Functions////////////////////
 function getComputerChoice() {
   const randomNum = Math.floor(Math.random() * 3); //returns a random integer from 0 to 2
-  /*switch (randomNum) {
+  switch (randomNum) {
     case 0:
       return "rock";
     case 1:
       return "paper";
     case 2:
       return "scissors";
-  }*/
-  return "rock";
+  }
 }
+
 function getResult(computer, user) {
   if (computer == user) {
     computerScore++;
@@ -34,6 +34,42 @@ function getResult(computer, user) {
     return "Error: wrong input";
   }
 }
+
+function clearButtons() {
+  rockButton.style.border = "0px";
+  paperButton.style.border = "0px";
+  scissorsButton.style.border = "0px";
+  rockButton.style.outline = "0px";
+  paperButton.style.outline = "0px";
+  scissorsButton.style.outline = "0px";
+}
+
+function colorButtons(computer, user) {
+  clearButtons();
+  switch (user) {
+    case "rock":
+      rockButton.style.border = "4px solid CadetBlue";
+      break;
+    case "paper":
+      paperButton.style.border = "4px solid CadetBlue";
+      break;
+    case "scissors":
+      scissorsButton.style.border = "4px solid CadetBlue";
+      break;
+  }
+  switch (computer) {
+    case "rock":
+      rockButton.style.outline = "2px solid Red";
+      break;
+    case "paper":
+      paperButton.style.outline = "2px solid Red";
+      break;
+    case "scissors":
+      scissorsButton.style.outline = "2px solid Red";
+      break;
+  }
+}
+
 //////////////Gameplay///////////
 
 let selectedOption = "";
@@ -45,12 +81,6 @@ const buttons = document.querySelector("#users-selection");
 const rockButton = document.querySelector("#rock");
 const paperButton = document.querySelector("#paper");
 const scissorsButton = document.querySelector("#scissors");
-const score = document.querySelector("#score");
-const alert = document.createElement("div");
-
-alert.textContent = "we started!";
-alert.style.color = "white";
-column.appendChild(alert);
 
 rockButton.addEventListener("click", function () {
   if (selectedOption == "") {
@@ -70,43 +100,28 @@ scissorsButton.addEventListener("click", function () {
     runScript();
   }
 });
-/*buttons.addEventListener("click", (event) => {
-  let target = event.target;
-  if (selectedOption === "") {
-    switch (target.id) {
-      case "rock":
-      case "paper":
-      case "scissors":
-        selectedOption = target.id;
-        runScript();
-        break;
-    }
-  }
-});*/
-let resultText, scorePointsDisplay, userPointsDisplay, computerPointsDisplay;
+
 function runScript() {
-  if (currentRound == 1) {
-    const computerChoice = getComputerChoice();
-    const result = getResult(computerChoice, selectedOption);
-    resultText = document.createElement("p");
-    resultText.textContent = result;
-    resultText.style.color = "white";
-    column.appendChild(resultText);
-    scorePointsDisplay = document.createElement("div");
-    computerPointsDisplay = document.createElement("span");
-    userPointsDisplay = document.createElement("span");
-    scorePointsDisplay.style.color = "white";
-    userPointsDisplay.textContent = `${userScore}:`;
-    computerPointsDisplay.textContent = `${computerScore}`;
-    scorePointsDisplay.appendChild(userPointsDisplay);
-    scorePointsDisplay.appendChild(computerPointsDisplay);
-    score.appendChild(scorePointsDisplay);
-  } else {
-    resultText.textContent = result;
-    userPointsDisplay.textContent = `${userScore}:`;
-    computerPointsDisplay.textContent = `${computerScore}`;
-  }
+  let computerChoice = getComputerChoice();
+  let result = getResult(computerChoice, selectedOption);
+  let resultText = document.getElementById("result-text");
+  resultText.textContent = result;
+  resultText.style.color = "white";
+  column.appendChild(resultText);
+
+  colorButtons(computerChoice, selectedOption);
+
+  let userPointsDisplay = document.getElementById("user-score");
+  let computerPointsDisplay = document.getElementById("computer-score");
+  userPointsDisplay.style.color = "Aquamarine";
+  computerPointsDisplay.style.color = "LightCoral";
+  userPointsDisplay.textContent = `You: ${userScore}`;
+  computerPointsDisplay.textContent = `Computer: ${computerScore}`;
+
   currentRound++;
+  let resultDisplay = document.getElementById("round");
+  resultDisplay.textContent = `Round: ${currentRound}`;
+
   selectedOption = "";
 }
 /*alert("GAME BEGAN!");

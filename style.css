@@ -5,6 +5,11 @@ body {
 button {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 70px;
+  width: 70px;
+  background-color: white;
 }
 
 #users-selection {
@@ -33,4 +38,8 @@ button {
   justify-content: start;
   align-items: center;
   color: white;
+}
+
+#score h3 {
+  margin-bottom: 0;
 }
